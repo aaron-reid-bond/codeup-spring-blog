@@ -1,25 +1,35 @@
 package com.codeup.codeupspringblog.controler;
 
+import com.codeup.codeupspringblog.models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+
 @Controller
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
-    public String posts() {
-        return "posts index page";
+    public String postsHome(Model model) {
+        ArrayList<Post> posts = new ArrayList<>();
+        posts.add(new Post(1,"test1", "askdjfa;ksjdflskjdflskdjfsjfbnjksnfbjsn"));
+        posts.add(new Post(2,"test2", "askdjfa;ksjdflskjdflskdjfsjfbnjksnfbjsn"));
+        posts.add(new Post(3,"test3", "askdjfa;ksjdflskjdflskdjfsjfbnjksnfbjsn"));
+        model.addAttribute("posts", posts);
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String postId(@PathVariable String id) {
-        return "view an individual post by id. this id is: " + id;
+    public String postId(@PathVariable String id, Model model) {
+        Post post = new Post(Long.parseLong(id), "this is the post", "this is the rest of the stuff!!!!!!!");
+        model.addAttribute("post", post);
+        return "posts/show";
     }
+
     @GetMapping("/posts/create")
     @ResponseBody
     public String postsCreate() {

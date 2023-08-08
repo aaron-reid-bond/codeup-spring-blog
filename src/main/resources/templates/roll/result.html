@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Results</title>
+  <head th:insert="partials :: head"></head>
+</head>
+<body>
+<nav th:insert="partials :: nav"></nav>
+<h1>Your Guess!</h1>
+
+<h1 th:text="${number}"></h1>
+
+<h1>The dice says</h1>
+
+<h1 th:text="${rand}"></h1>
+
+<div th:if="${gNumber}">
+  <h3>Wow good job you guessed it</h3>
+</div>
+<div th:if="${bNumber}">
+  <h3>Ah bad luck!! try again.</h3>
+</div>
+
+<form action="/roll-dice" method="get">
+  <button>Try again</button>
+</form>
+<script th:replace="partials :: script1"></script>
+<script th:replace="partials :: script2"></script>
+</body>
+</html>
