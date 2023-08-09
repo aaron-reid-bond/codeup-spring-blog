@@ -27,8 +27,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable String id, Model model) {
-        Post post = new Post(Long.parseLong(id), "this is the post", "this is the rest of the stuff!!!!!!!");
-        model.addAttribute("post", post);
+        model.addAttribute("post", postDao.getById(Long.parseLong(id)));
         return "posts/show";
     }
 

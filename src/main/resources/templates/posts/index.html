@@ -9,8 +9,8 @@
   <nav th:insert="partials :: nav"></nav>
 
   <div th:each="post : ${posts}">
-    <a th:href="@{/posts/{id} (id= ${post.id})}" ><h1 th:text="${post.title}"></h1></a>
-    <p th:text="${post.body}"></p>
+    <a th:href="@{/posts/{id} (id= ${post.getId()})}" ><h1 th:text="${post.getTitle()}"></h1></a>
+    <p th:text="${post.getBody()}"></p>
   </div>
 
   <script th:replace="partials :: script1"></script>
