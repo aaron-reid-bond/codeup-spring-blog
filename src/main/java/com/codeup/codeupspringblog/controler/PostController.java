@@ -1,7 +1,9 @@
 package com.codeup.codeupspringblog.controler;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +13,13 @@ import java.util.ArrayList;
 @Controller
 public class PostController {
 
-    // These two next steps are often called dependency injection, where we create a Repository instance and initialize it in the controller class constructor.
     private final PostRepository postDao;
 
-    public PostController(PostRepository postDao) {
+    private final UserRepository userDao;
+
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
@@ -26,8 +30,8 @@ public class PostController {
 
 
     @GetMapping("/posts/{id}")
-    public String postId(@PathVariable String id, Model model) {
-        model.addAttribute("post", postDao.getById(Long.parseLong(id)));
+    public String postId(@PathVariable long id, Model model) {
+        model.addAttribute("post", postDao.getById(id));
         return "posts/show";
     }
 
@@ -38,7 +42,8 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPostPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-        postDao.save(new Post(title, body));
+        User user = userDao.getById(1L);
+        postDao.save(new Post(title, body, user));
         return "redirect:/posts";
     }
 }
