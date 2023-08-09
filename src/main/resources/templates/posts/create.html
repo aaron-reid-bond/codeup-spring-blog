@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create</title>
+  <head th:insert="partials :: head"></head>
+</head>
+<body>
+<nav th:insert="partials :: nav"></nav>
+
+<form action="/posts/create" method="post">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Title</label>
+    <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Body</label>
+    <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form>
+
+<script th:replace="partials :: script1"></script>
+<script th:replace="partials :: script2"></script>
+</body>
+</html>
