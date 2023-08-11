@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Create</title>
+  <title>Edit</title>
   <head th:insert="partials :: head"></head>
 </head>
 <body>
@@ -10,12 +10,12 @@
 
 <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Title</label>
-    <input th:field="*{title}" name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="title" class="form-label">Title</label>
+    <input th:field="*{title}" type="text" class="form-control">
   </div>
   <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Body</label>
-    <textarea th:field="*{body}" name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="body" class="form-label">Body</label>
+    <textarea th:field="*{body}" class="form-control"  rows="3"></textarea>
   </div>
   <div class="col-12">
     <button class="btn btn-primary" type="submit">Submit form</button>
