@@ -2,9 +2,11 @@ package com.codeup.codeupspringblog.controler;
 
 import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
+import com.codeup.codeupspringblog.models.UserWithRoles;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import com.codeup.codeupspringblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,10 +54,12 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPostPost(@ModelAttribute Post post){
-        User user = userDao.getById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
-        postDao.save(new Post(post));
-        emailService.prepareAndSend(post, user.getUsername() + " thanks for creating a post!", user.getUsername() + " thanks for creating the post: " + post.getTitle());
+        postDao.save(post);
+        emailService.prepareAndSend(post, user.getUsername()
+                + " thanks for creating a post!", user.getUsername()
+                + " thanks for creating the post: " + post.getTitle());
         return "redirect:/posts";
     }
 }

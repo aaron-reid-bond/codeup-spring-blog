@@ -42,6 +42,16 @@ public class Post {
         this.body = post.title;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", user=" + user +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
